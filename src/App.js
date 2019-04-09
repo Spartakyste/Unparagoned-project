@@ -17,8 +17,7 @@ getItem() {
       headers:{
         'Target-Endpoint' : "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=21787"
       }
-    })
-      .then(response  => { 
+    }).then(response  => { 
         console.log(response)
         return response.json()
       })
