@@ -13,7 +13,11 @@ class App extends Component {
 }
 
 getItem() {
-    fetch("http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=21787")
+    fetch("https://unparagoned.herokuapp.com/",{
+      headers:{
+        'Target-Endpoint' : "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=21787"
+      }
+    })
       .then(response  => { 
         console.log(response)
         return response.json()
