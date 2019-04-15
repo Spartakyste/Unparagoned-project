@@ -23,7 +23,7 @@ class App extends Component {
 componentDidMount(){
     const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item="
     const apiCharacter = "http://localhost:8010/proxy/runemetrics/profile/profile?user=Spartakyste&activities=20"
-      /*fetch(`${api}31725`)
+      fetch(`${api}31725`)
         .then(response  => response.json())
         .then(data  => {this.setState({item: data.item})});
       fetch(`${api}31729`)
@@ -31,7 +31,7 @@ componentDidMount(){
         .then(data  => {this.setState({secondItem: data.item})});
       fetch(`${api}31733`)
         .then(response  => response.json())
-        .then(data  => {this.setState({thirdItem: data.item})});*/
+        .then(data  => {this.setState({thirdItem: data.item})});
       fetch(apiCharacter)
         .then(response => response.json())
         .then(data => {this.setState({characterInfos: data})});
