@@ -1,13 +1,12 @@
 import React from 'react';
 
-    const  ApiItems = ({ selectitem }) => {
+    const  ApiItems = ({currentItem}) => {
         return (
-            <div  className="ApiItems">
-                <img height="190vh" width="150vw" src={selectitem.icon}  alt=""  />
-                <ul>
-                    <li>Holder{selectitem.id}</li>
-                    <li>{selectitem.price}</li>
-                </ul>
+            <div>
+                <img height="190px" width="150px" src={currentItem.icon_large}  alt={currentItem.name}  />
+                <p>{currentItem.name}</p>
+                <p>{currentItem.description}</p>
+                <p>{currentItem.current.price}</p>
             </div>
         );
     };

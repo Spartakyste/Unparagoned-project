@@ -2,37 +2,31 @@ import React, { Component } from 'react';
 import './App.css';
 import Timer from "./Components/Time"
 import ApiItems from './Components/ApiItems';
-import ItemButton from './Components/ItemButton';
+import SearchBarItems from './Components/SearchBarItems';
 
 class App extends Component {
   constructor(){
     super()
     this.state = { 
-        item : ""
+        item : [],
+        itemSearch : "21787"
     }
 }
 
-getItem() {
-    fetch("https://unparagoned.herokuapp.com/",{
-      headers:{
-        'Target-Endpoint' : "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item=21787"
-      }
-    }).then(response  => { 
-        console.log(response)
-        return response.json()
-      })
-      .then(data  => {
-        this.setState({
-          item: data[0],
-        });
-    });
+renderApiCall(){
+  const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item="
+  console.log(api)
+    fetch(`${api}${this.state.itemSearch}`)
+      .then(response  => response.json())
+      .then(data  => {this.setState({item: data.item})});
 }
+
   render() {
     return (
       <div className="App">
-        <Timer />
-        <ItemButton item={() => this.getItem()}/>
-        <ApiItems selectitem={this.state.item}/>   
+        <Timer/>
+         {this.state.item.length === 0 ? <p>Wait for it</p> : <ApiItems currentItem={this.state.item}/>}
+         <SearchBarItems itemID={this.state.itemSearch} method={this.renderApiCall()}/>
       </div>
     );
   }
