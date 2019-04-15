@@ -1,8 +1,22 @@
 .App {
   text-align: center;
 }
-
+/*Component giving time and date*/
 .time{
   margin-top:1rem;
   font-size: 21px;
+}
+.titleSection{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+/*Images effects inside the tiles*/
+.grow{ 
+  transition: all .4s ease-out;
+}
+.grow:hover {
+   transform: scale(1.1); 
+}
+.imageoverflow{
+  overflow: hidden;
 }
