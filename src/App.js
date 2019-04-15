@@ -7,6 +7,7 @@ import Title from './Components/HtmlRendering/Title';
 import Presentation from './Components/HtmlRendering/Presentation';
 import Tiles from './Components/HtmlRendering/Tiles';
 import Footer from './Components/HtmlRendering/Footer';
+import CharacterInfos from './Components/CharacterInfos';
 
 class App extends Component {
   constructor(){
@@ -14,14 +15,15 @@ class App extends Component {
     this.state = { 
         item : [],
         secondItem : [],
-        thirdItem : []
+        thirdItem : [],
+        characterInfos : []
     }
 }
 
 componentDidMount(){
     const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item="
-    console.log(api)
-      fetch(`${api}31725`)
+    const apiCharacter = "http://localhost:8010/proxy/runemetrics/profile/profile?user=Spartakyste&activities=20"
+      /*fetch(`${api}31725`)
         .then(response  => response.json())
         .then(data  => {this.setState({item: data.item})});
       fetch(`${api}31729`)
@@ -29,7 +31,10 @@ componentDidMount(){
         .then(data  => {this.setState({secondItem: data.item})});
       fetch(`${api}31733`)
         .then(response  => response.json())
-        .then(data  => {this.setState({thirdItem: data.item})});
+        .then(data  => {this.setState({thirdItem: data.item})});*/
+      fetch(apiCharacter)
+        .then(response => response.json())
+        .then(data => {this.setState({characterInfos: data})});
   }
 
 
@@ -43,6 +48,7 @@ componentDidMount(){
         <Title/>
         <Presentation/>
         <Tiles currentItem={this.state.item} secondItem={this.state.secondItem} thirdItem={this.state.thirdItem}/>
+        {this.state.characterInfos.length === 0 ? <p>Wait for it</p> : <CharacterInfos currentCharacter={this.state.characterInfos} />}
         <Footer/>
       </div>
     );

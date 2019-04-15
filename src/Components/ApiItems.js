@@ -2,7 +2,7 @@ import React from 'react';
 
     const  ApiItems = ({currentItem, secondItem, thirdItem}) => {
         return (
-            <div>
+            <div   className="apiRendering">
                 <div>
                     <img height="190px" width="150px" src={currentItem.icon_large}  alt={currentItem.name}  />
                     <p>{currentItem.name}</p>

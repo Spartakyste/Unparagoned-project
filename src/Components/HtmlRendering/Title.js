@@ -2,14 +2,14 @@ import React from 'react';
 
 const Title = () => {
     return ( 
-        <section className="hero is-light is-bold">
+        <section className="titlecomp hero is-light is-bold">
             <div className="hero-body">
                 <div className="container">
                     <h1 className="title">
-                        Title
+                        Unparagoned
                     </h1>
                     <h2 className="subtitle">
-                        Subtitle
+                        A website for all the informations you'll ever need.
                     </h2>
                 </div>
             </div>

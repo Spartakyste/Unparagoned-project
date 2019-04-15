@@ -20,3 +20,20 @@
 .imageoverflow{
   overflow: hidden;
 }
+
+/*Component title*/
+.titlecomp{
+  margin-top: 1rem;
+}
+
+/*Scoreboard*/
+.table{
+  width: 100%;
+  border: 2px solid gold;
+  border-radius: 4px;
+}
+
+/*Api component, margins between items*/
+.apiRendering{
+  margin-top: 4rem;
+}
