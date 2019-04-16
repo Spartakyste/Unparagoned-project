@@ -22,7 +22,7 @@ class App extends Component {
 
 componentDidMount(){
     const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item="
-    const apiCharacter = " https://apps.runescape.com/runemetrics/profile/profile?user=Spartakyste&activities=20"
+    const apiCharacter = "http://localhost:8011/proxy/profile/profile?user=Gempat&activities=20"
       fetch(`${api}31725`)
         .then(response  => response.json())
         .then(data  => {this.setState({item: data.item})});
@@ -45,10 +45,9 @@ componentDidMount(){
         <NavBar/>
           <ModalSignUp/>
           <ModalLogIn/>
-        <Title/>
+        <Title />
         <Presentation/>
-        <Tiles currentItem={this.state.item} secondItem={this.state.secondItem} thirdItem={this.state.thirdItem}/>
-        {this.state.characterInfos.length === 0 ? <p>Wait for it</p> : <CharacterInfos currentCharacter={this.state.characterInfos} />}
+        <Tiles currentCharacter={this.state.characterInfos} currentItem={this.state.item} secondItem={this.state.secondItem} thirdItem={this.state.thirdItem}/>
         <Footer/>
       </div>
     );

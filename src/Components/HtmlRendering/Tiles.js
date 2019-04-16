@@ -1,18 +1,19 @@
 import React from 'react';
 import Timer from '../Timer';
 import ApiItems from '../ApiItems';
+import CharacterInfos from '../CharacterInfos';
 
-const Tiles = ({currentItem, secondItem, thirdItem}) => {
+const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
     return ( 
         <section className="columns" style={{margin:4}}>
             <article className="tile is-ancestor">
                 <div className="tile is-vertical is-8">
                     <div className="tile">
                         <div className="tile is-parent is-vertical">
-                            <article className="tile is-child notification is-primary">
-                                <p className="title">Our current competition scoreboard :</p>
-                                <aside className="columns" style={{margin:0.5}}>
-                                    <table className="table">
+                            <article className="tile columns is-child notification is-primary">
+                                <aside className="column is-8" style={{margin:0.5}}>
+                                <p className="scoreboardTitle">Our current competition scoreboard :</p>
+                                    <table className="table tableSize">
                                         <thead>
                                             <tr>
                                                 <th><abbr title="Position">Pos</abbr></th>
@@ -65,6 +66,8 @@ const Tiles = ({currentItem, secondItem, thirdItem}) => {
                                         </tbody>
                                     </table>
                                 </aside>
+                            {currentCharacter.length === 0 ? <p>Wait for it</p> 
+                            : <CharacterInfos className="column is-4" currentCharacter={currentCharacter} />}
                             </article>
                         </div>
                     </div>

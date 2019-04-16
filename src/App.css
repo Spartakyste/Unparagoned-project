@@ -28,7 +28,6 @@
 
 /*Scoreboard*/
 .table{
-  width: 100%;
   border: 2px solid gold;
   border-radius: 4px;
 }
@@ -36,4 +35,21 @@
 /*Api component, margins between items*/
 .apiRendering{
   margin-top: 4rem;
+}
+.scoreboardTitle{
+  display: flex;
+  justify-content: center;
+  color: rgb(255, 56, 96);
+  font-size: 1.5rem;
+}
+
+.clanMateInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.tableSize{
+  width: 100%;
 }
