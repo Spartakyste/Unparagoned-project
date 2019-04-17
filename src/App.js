@@ -7,7 +7,6 @@ import Title from './Components/HtmlRendering/Title';
 import Presentation from './Components/HtmlRendering/Presentation';
 import Tiles from './Components/HtmlRendering/Tiles';
 import Footer from './Components/HtmlRendering/Footer';
-import CharacterInfos from './Components/CharacterInfos';
 
 class App extends Component {
   constructor(){
