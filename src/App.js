@@ -20,7 +20,7 @@ class App extends Component {
 }
 
 componentDidMount(){
-    const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item="
+    const api = "http://services.runescape.com/m=itemdb_rs/api/catalogue/detail.json?item="
     const apiCharacter = "https://apps.runescape.com/runemetrics/profile/profile?user=Gempat&activities=20"
       fetch(`${api}31725`)
         .then(response  => response.json())
