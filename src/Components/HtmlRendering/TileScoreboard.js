@@ -3,10 +3,10 @@ import CharacterInfos from '../CharacterInfos';
 
 const TileScoreboard = ({currentCharacter}) => {
     return ( 
-        <article className="tile columns is-child notification is-primary">
-            <aside className="column is-8" style={{margin:0.5}}>
+        <article className="tile columns is-child notification is-primary tableWrapper">
+            <aside className="column is-7 table-container" style={{margin:0.5}}>
             <p className="scoreboardTitle">Our current competition scoreboard :</p>
-                <table className="table tableSize">
+                <table className="table is-fullwidth">
                     <thead>
                         <tr>
                             <th><abbr title="Position">Pos</abbr></th>
@@ -60,7 +60,7 @@ const TileScoreboard = ({currentCharacter}) => {
                 </table>
             </aside>
             {currentCharacter.length === 0 ? <p>Wait for it</p> 
-            : <CharacterInfos className="column is-4" currentCharacter={currentCharacter} />}
+            : <CharacterInfos className="column is-5" currentCharacter={currentCharacter} />}
         </article>
      );
 }

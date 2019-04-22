@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.css'
 
-class Timer extends Component {
-    constructor(){;
-    super()
-        this.state = { 
-            time : ""
+const Timer = () => {
+    const [time, setTime] = useState(new Date().toDateString());
+
+     useEffect(() => {
+        const updateTime = () => {
+            setTime(new Date().toLocaleTimeString());
         }
-    }
-    componentDidMount() {
-        setInterval(this.getDate, 1000)
-        this.getDate();
-    };
-    
-      getDate = () => {
-        const time = new Date().toLocaleString();
-        this.setState({ time });
-    };
+        setInterval(updateTime, 1000);
+    }, clearInterval());
 
-    render() { 
-        return ( 
-            <div>
-                <p className="time">Hello we are the {this.state.time}</p>
-            </div>
-         );
-    }
+    return ( 
+        <div>
+            <p className="time">Hello it's {time}</p>
+        </div>
+     );
 }
-
+ 
 export default Timer;
-

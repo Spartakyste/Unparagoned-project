@@ -18,7 +18,6 @@ const TilePictures = () => {
                                 <p className="subtitle is-6">@johnsmith</p>
                             </div>
                         </div>
-
                         <div className="content">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Phasellus nec iaculis mauris.
@@ -28,6 +27,7 @@ const TilePictures = () => {
                     </div>
                 </div>
             </div>
+            
             <div className="tile is-6 column">
                 <div className="card">
                     <div className="card-image">
@@ -44,7 +44,6 @@ const TilePictures = () => {
                                 <p className="subtitle is-6">@johnsmith</p>
                             </div>
                         </div>
-
                         <div className="content">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Phasellus nec iaculis mauris.

@@ -4,21 +4,24 @@ import React from 'react';
         return (
             <div className="apiRendering">
                 <div>
-                    <img height="190px" width="150px" src={currentItem.icon_large}  alt={currentItem.name}  />
-                    <p>{currentItem.name}</p>
+                    <img className="grow" height="190px" width="150px" src={currentItem.icon_large}  alt={currentItem.name}  />
+                    <p style={{color: "rgb(210,105,30)"}}>{currentItem.name}</p>
                     <p>{currentItem.description}</p>
                     <p>Current G.E price : {currentItem.current.price}</p>
+                    <p>The {currentItem.name} is : {currentItem.today.price} compared to yesterday.</p>
                 </div>
                 <div>
-                    <img height="190px" width="150px" src={secondItem.icon_large}  alt={secondItem.name}  />
-                    <p>{secondItem.name}</p>
+                    <img className="grow" height="190px" width="150px" src={secondItem.icon_large}  alt={secondItem.name}  />
+                    <p style={{color: "rgb(210,105,30)"}}>{secondItem.name}</p>
                     <p>{secondItem.description}</p>
                     <p>Current G.E price : {secondItem.current.price}</p>
+                    <p>The {secondItem.name} is : {secondItem.today.price} compared to yesterday.</p>
                 <div>
-                    <img height="190px" width="150px" src={thirdItem.icon_large}  alt={thirdItem.name}  />
-                    <p>{thirdItem.name}</p>
+                    <img className="grow" height="190px" width="150px" src={thirdItem.icon_large}  alt={thirdItem.name}  />
+                    <p style={{color: "rgb(210,105,30)"}}>{thirdItem.name}</p>
                     <p>{thirdItem.description}</p>
                     <p>Current G.E price : {thirdItem.current.price}</p>
+                    <p>The {thirdItem.name} is : {thirdItem.today.price} compared to yesterday.</p>
                 </div>
             </div>
         </div>
