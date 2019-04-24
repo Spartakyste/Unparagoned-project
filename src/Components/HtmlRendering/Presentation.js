@@ -1,13 +1,15 @@
 import React from 'react';
 
-const Presentation = () => {
+const Presentation = (handleInput, handleSubmit) => {
     return ( 
         <section className="container is-fluid titleSection">
             <div className="notification is-info">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="name">
+                    Name :
+                    <input type="text" defaultValue="Gempat" onChange={handleInput}></input>
+                </label>
+            </form>
             </div>
         </section>
      );
