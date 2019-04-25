@@ -7,10 +7,15 @@ const ModalSignUp = () => {
                 <div className="modal-background"></div>
                 <div className="modal-card" style={{top:10}}>
                     <header className="modal-card-head">
-                        <p className="modal-card-title">Modal title</p>
+                        <p className="modal-card-title">We'll need some informations about you :</p>
                         <button id="buttonCloseModal" className="delete" aria-label="close"></button>
                     </header>
                     <section className="modal-card-body">
+
+                    <div className="field">
+                            <div className="control"/>
+                                <input className="input" type="text" placeholder="In-game Username"/>
+                            </div>
                         <div className="field">
                             <p className="control has-icons-left has-icons-right">
                                 <input className="input" type="email" placeholder="Email"/>
@@ -22,6 +27,7 @@ const ModalSignUp = () => {
                                 </span>
                             </p>
                         </div>
+                        
                         <div className="field">
                             <p className="control has-icons-left">
                                 <input className="input" type="password" placeholder="Password"/>
@@ -30,9 +36,17 @@ const ModalSignUp = () => {
                                 </span>
                             </p>
                         </div>
+                        <div className="field">
+                            <p className="control has-icons-left">
+                                <input className="input" type="password" placeholder="Confirm your password"/>
+                                <span className="icon is-small is-left">
+                                    <i className="fas fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
                     </section>
                     <footer className="modal-card-foot">
-                        <button className="button is-success">Save changes</button>
+                        <button className="button is-success">Register</button>
                         <button id="modalCancelButton" className="button">Cancel</button>
                     </footer>
                 </div>

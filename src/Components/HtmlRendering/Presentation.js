@@ -2,12 +2,12 @@ import React from 'react';
 
 const Presentation = (handleInput, handleSubmit) => {
     return ( 
-        <section className="container is-fluid titleSection">
+        <section className="container titleSection">
             <div className="notification is-info">
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">
-                    Name :
-                    <input type="text" defaultValue="Gempat" onChange={handleInput}></input>
+            <form className="column" onSubmit={() => handleSubmit}>
+              You can submit a name to fetch the informations :
+                <label className="column" htmlFor="name">
+                    <input type="text" defaultValue="" onChange={() => handleInput} required></input>
                 </label>
             </form>
             </div>

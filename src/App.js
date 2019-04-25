@@ -18,8 +18,7 @@ class App extends Component {
         inputCharacter : "Gempat"
     }
     this.handleInput = this.handleInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleErrors = this.handleErrors.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 };
 
 componentDidMount(){
@@ -44,20 +43,12 @@ handleInput(event){
   this.setState({inputCharacter : event.target.value});
 };
 
-handleErrors(response) {
-  console.log(response)
-  if (response.error === "NO_PROFILE" || "PROFILE_PRIVATE") {
-      alert("There's no such character nor they have private turned On");
-  }
-  return response;
-}
 
 handleSubmit(event){
   event.preventDefault();
   const apiCharacter = `http://localhost:8011/proxy/profile/profile?user=${this.state.inputCharacter}&activities=20`
   fetch(apiCharacter)
         .then(response => response.json())
-        .then(this.handleErrors)
         .then(data => {this.setState({characterInfos: data})});
 }
 
@@ -72,9 +63,9 @@ handleSubmit(event){
         <section className="container titleSection">
             <div className="notification is-info">
             <form className="column" onSubmit={this.handleSubmit}>
-              You can submit a name to fetch the informations :
+              You can submit a Runescape name to fetch the informations :
                 <label className="column" htmlFor="name">
-                    <input type="text" defaultValue="" onChange={this.handleInput} required></input>
+                    <input type="text" onChange={this.handleInput} required></input>
                 </label>
             </form>
             </div>

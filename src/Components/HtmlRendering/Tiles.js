@@ -24,7 +24,7 @@ const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
                         <Timer/>
                         
                         {currentItem.length === 0 || secondItem.length === 0 || thirdItem.length === 0 
-                        ? <p>Wait for it</p> 
+                        ? <div className="loader "></div> 
                         : <ApiItems currentItem={currentItem} secondItem = {secondItem} thirdItem={thirdItem} />}
                     </div>
                     </article>

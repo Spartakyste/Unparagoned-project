@@ -4,8 +4,6 @@ import CharacterInfos from '../CharacterInfos';
 const TileScoreboard = ({currentCharacter}) => {
     return ( 
         <article className="tile columns is-child notification is-primary tableWrapper">
-        {currentCharacter.length === 0 ? <p>Wait for it</p> 
-        : <CharacterInfos className="column is-5" currentCharacter={currentCharacter} />}
             <aside className="column is-7 table-container" style={{margin:0.5}}>
             <p className="scoreboardTitle">Our current competition scoreboard :</p>
                 <table className="table is-fullwidth">
@@ -61,6 +59,8 @@ const TileScoreboard = ({currentCharacter}) => {
                     </tbody>
                 </table>
             </aside>
+            {currentCharacter.length === 0 ? <div className="loader"></div> 
+        : <CharacterInfos className="column is-5" currentCharacter={currentCharacter} />}
         </article>
      );
 }
