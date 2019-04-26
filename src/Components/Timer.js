@@ -9,11 +9,11 @@ const Timer = () => {
             setTime(new Date().toLocaleTimeString());
         }
         setInterval(updateTime, 1000);
-    }, clearInterval());
+    }, []);
 
     return ( 
         <div>
-            <p className="time">Hello it's {time}</p>
+            <p className="title time">Hello it's {time}</p>
         </div>
      );
 }

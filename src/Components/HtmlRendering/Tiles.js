@@ -3,6 +3,7 @@ import Timer from '../Timer';
 import ApiItems from '../ApiItems';
 import TileScoreboard from './TileScoreboard';
 import TilePictures from './TilePictures';
+import CharacterInfos from '../CharacterInfos';
 
 const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
     return ( 
@@ -12,6 +13,8 @@ const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
                     <div className="tile">
                         <div className="tile is-parent is-vertical">
                             <TileScoreboard currentCharacter={currentCharacter}/>
+                            {currentCharacter.length === 0 ? <div className="loader"></div> 
+                            : <CharacterInfos className="is-5" currentCharacter={currentCharacter} />}
                         </div>
                     </div>
                     <div className="tile is-parent">
@@ -19,7 +22,7 @@ const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
                     </div>
                 </div>
                 <div className="tile is-parent">
-                    <article className="tile is-child notification">
+                    <article className="tile is-child notification itemsDisplay">
                     <div>
                         <Timer/>
                         

@@ -48,6 +48,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-left : 1px solid blue;
+  border-right: 1px solid blue;
 }
 
 /*loader*/
@@ -65,4 +67,41 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.levelsDisplay{
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.levelsDisplayInfos{ 
+  color : #3498db;
+
+}
+
+.levelsDisplayCss{
+  background-color: #3498db;
+  color: white;
+  border-radius: 2px;
+}
+.buttonText{
+  overflow: hidden;
+  border-left:1em solid transparent;
+  border-right:1em solid transparent;
+  text-overflow: ellipsis;
+}
+.buttonShow{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.radial{
+  display: flex;
+  justify-content: center;
+}
+.itemsDisplay{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }

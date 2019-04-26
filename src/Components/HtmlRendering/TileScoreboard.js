@@ -1,11 +1,10 @@
 import React from 'react';
-import CharacterInfos from '../CharacterInfos';
 
-const TileScoreboard = ({currentCharacter}) => {
+const TileScoreboard = () => {
     return ( 
-        <article className="tile columns is-child notification is-primary tableWrapper">
-            <aside className="column is-7 table-container" style={{margin:0.5}}>
-            <p className="scoreboardTitle">Our current competition scoreboard :</p>
+        <article className="tile is-child notification is-primary">
+            <aside className="table-container" style={{margin:0.5}}>
+            <p className="scoreboardTitle">Our current competition scoreboard</p>
                 <table className="table is-fullwidth">
                     <thead>
                         <tr>
@@ -59,8 +58,6 @@ const TileScoreboard = ({currentCharacter}) => {
                     </tbody>
                 </table>
             </aside>
-            {currentCharacter.length === 0 ? <div className="loader"></div> 
-        : <CharacterInfos className="column is-5" currentCharacter={currentCharacter} />}
         </article>
      );
 }

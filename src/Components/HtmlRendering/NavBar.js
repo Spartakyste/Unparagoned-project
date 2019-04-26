@@ -6,7 +6,7 @@ const NavBar = () => {
             <nav className="navbar is-link" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="">
-                        <img src="https://via.placeholder.com/100x60" width="75" height="28"/>
+                        <img src="http://icons.iconarchive.com/icons/papirus-team/papirus-apps/256/runescape-icon.png"/>
                     </a>
 
                     <a role="button" id ="burgerButton" className="navbar-burger burger" aria-label="menu" aria-expanded="false"
