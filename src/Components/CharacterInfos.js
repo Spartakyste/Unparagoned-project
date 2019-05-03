@@ -130,7 +130,8 @@ const CharacterInfos = ({currentCharacter}) => {
                      total xp :  {factoringNumbers(currentCharacter.skillvalues[4].xp)}</li>
                 </ul>
                 <a onClick={() => useShowInfos(false)} className="button is-small buttonShow">
-                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of {currentCharacter.name}</span></a>
+                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of
+                 {currentCharacter.name}</span></a>
             </div>}
         </div>
      );
