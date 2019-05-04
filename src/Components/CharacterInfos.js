@@ -5,10 +5,12 @@ const CharacterInfos = ({currentCharacter}) => {
 
     const [showInfos, useShowInfos] = useState(false);
 
+    //Data for the graphics, the number came from the character API
     const myData = [{angle: currentCharacter.skillvalues[0].xp}, {angle: currentCharacter.skillvalues[1].xp},
                     {angle: currentCharacter.skillvalues[2].xp}, {angle: currentCharacter.skillvalues[3].xp}, 
                     {angle: currentCharacter.skillvalues[4].xp}];
 
+    //Display properly the numbers of experience, must refactor it
     const factoringNumbers = (number) => {
         const firstFactoring = number.toFixed(number.length).slice(0, -1);
         if (firstFactoring.length === 9){
@@ -33,6 +35,7 @@ const CharacterInfos = ({currentCharacter}) => {
         }
     }
      
+    //Simply convert the number recieved into the appropriate skill
     const convertSkill = (number) => {
         switch(number){
             case(26) : number = "Invention";
@@ -130,8 +133,7 @@ const CharacterInfos = ({currentCharacter}) => {
                      total xp :  {factoringNumbers(currentCharacter.skillvalues[4].xp)}</li>
                 </ul>
                 <a onClick={() => useShowInfos(false)} className="button is-small buttonShow">
-                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of
-                 {currentCharacter.name}</span></a>
+                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of {currentCharacter.name}</span></a>
             </div>}
         </div>
      );

@@ -25,7 +25,6 @@ const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
                     <article className="tile is-child notification itemsDisplay">
                     <div>
                         <Timer/>
-                        
                         {currentItem.length === 0 || secondItem.length === 0 || thirdItem.length === 0 
                         ? <div className="loader "></div> 
                         : <ApiItems currentItem={currentItem} secondItem = {secondItem} thirdItem={thirdItem} />}

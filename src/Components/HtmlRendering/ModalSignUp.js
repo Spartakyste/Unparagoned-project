@@ -11,6 +11,7 @@ const ModalSignUp = () => {
                         <p className="modal-card-title">We'll need some informations about you :</p>
                         <button id="buttonCloseModal" className="delete" aria-label="close"></button>
                     </header>
+                    {/*Form heading to a PHP file, itself leading to MySQL database*/}
                     <section className="modal-card-body">
                         <form action="http://localhost/PHP/test.php" autocomplete="off" method="post">
                                 <input required className="input" type="text" name="rs-name" placeholder="Rs Name"/>
