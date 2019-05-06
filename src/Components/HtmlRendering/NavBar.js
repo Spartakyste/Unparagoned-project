@@ -1,4 +1,8 @@
 import React from 'react';
+import { Route, NavLink, Switch } from "react-router-dom";
+import Home from './Home';
+import FullScoreboardPage from './FullScoreboardPage';
+
 
 const NavBar = () => {
     return ( 
@@ -19,13 +23,13 @@ const NavBar = () => {
 
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                        <a className="navbar-item" href="index.html">
+                        <NavLink to ="/" className="navbar-item">
                             Home
-                        </a>
+                        </NavLink>
 
-                        <a className="navbar-item" href="table.html">
+                        <NavLink to ="/Scoreboard" className="navbar-item">
                             Table informations
-                        </a>
+                        </NavLink>
                     </div>
 
                     <div className="navbar-end">
@@ -42,6 +46,10 @@ const NavBar = () => {
                     </div>
                 </div>
             </nav>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="" component={FullScoreboardPage}/>
+            </Switch>
         </header>
      );
 }
