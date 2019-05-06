@@ -49,9 +49,9 @@ handleInput(event){
 handleSubmit(event){
   event.preventDefault();
   const apiCharacter = `http://localhost:8011/proxy/profile/profile?user=${this.state.inputCharacter}&activities=20`
-  fetch(apiCharacter)
-        .then(response => response.json())
-        .then(data => {this.setState({characterInfos: data})});
+    axios.get(apiCharacter)
+    .then(response => { this.setState({ characterInfos: response.data })})
+    .catch(error => {console.log(error)});
 }
 
   render() {
