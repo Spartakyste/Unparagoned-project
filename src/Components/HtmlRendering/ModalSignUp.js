@@ -12,10 +12,10 @@ const ModalSignUp = () => {
                         <button id="buttonCloseModal" className="delete" aria-label="close"></button>
                     </header>
                     <section className="modal-card-body">
-                        <form action="http://localhost/PHP/test.php" autocomplete="off" method="post">
+                        <form action="http://localhost/PHP/test.php" autoComplete="off" method="post">
                                 <input required className="input" type="text" name="rs-name" placeholder="Rs Name"/>
                                 <input required className="input" type="password" name="password" placeholder="Password" />
-                                <input required className="input" type="text" name="sexe" maxLength="1" />
+                                <input required className="input" type="radio" name="sexe" value="M" maxLength="1" />
                             <footer className="modal-card-foot">
                                 <input type="submit" name="submit" />
                                 <button id="modalCancelButton" className="button">Cancel</button>
