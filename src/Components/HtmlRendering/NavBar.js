@@ -48,7 +48,7 @@ const NavBar = () => {
             </nav>
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route path="" component={FullScoreboardPage}/>
+                <Route path="/Scoreboard" component={FullScoreboardPage}/>
             </Switch>
         </header>
      );

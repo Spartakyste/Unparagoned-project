@@ -5,14 +5,15 @@ import TileScoreboard from './TileScoreboard';
 import TilePictures from './TilePictures';
 import CharacterInfos from '../CharacterInfos';
 
-const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
+const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter, databaseCharacters}) => {
+
     return ( 
         <section className="columns" style={{margin: "1rem"}}>
             <article className="tile is-ancestor">
                 <div className="tile is-vertical is-8">
                     <div className="tile">
                         <div className="tile is-parent is-vertical">
-                            <TileScoreboard currentCharacter={currentCharacter}/>
+                            <TileScoreboard characterFromDatabase={databaseCharacters}/>
                             {currentCharacter.length === 0 ? <div className="loader"></div> 
                             : <CharacterInfos className="is-5" currentCharacter={currentCharacter} />}
                         </div>

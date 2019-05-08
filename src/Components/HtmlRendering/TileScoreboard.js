@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TileScoreboard = () => {
+const TileScoreboard = ({characterFromDatabase}) => {
     return ( 
         <article className="tile is-child notification is-primary">
             <aside className="table-container" style={{margin:0.5}}>
@@ -16,46 +16,17 @@ const TileScoreboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td><a href="">Gempat</a>
+                    {characterFromDatabase.map((character, index) => 
+                        <tr key={index}>
+                            <th>{index + 1}</th>
+                            <td><a href="">{character.rs_name}</a>
                             </td>
                             <td>38</td>
                             <td>23</td>
                             <td>12</td>
                         </tr>
-                        <tr>
-                            <th>2</th>
-                            <td><a href="">Chronicius</a></td>
-                            <td>32</td>
-                            <td>20</td>
-                            <td>11</td>
-                        </tr>
-                        <tr>
-                            <th>3</th>
-                            <td><a href="">William</a>
-                            </td>
-                            <td>28</td>
-                            <td>23</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <th>4</th>
-                            <td><a href="">Josh</a>
-                            </td>
-                            <td>20</td>
-                            <td>23</td>
-                            <td>12</td>
-                        </tr>
-                        <tr>
-                            <th>5</th>
-                            <td><a href="">Spartakyste</a>
-                            </td>
-                            <td>8</td>
-                            <td>23</td>
-                            <td>12</td>
-                        </tr>
-                    </tbody>
+                       )}
+                </tbody>
                 </table>
             </aside>
         </article>
