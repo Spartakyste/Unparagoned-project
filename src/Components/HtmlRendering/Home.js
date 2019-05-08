@@ -13,6 +13,7 @@ class Home extends Component {
             thirdItem: [],
             characterInfos: [],
             databaseCharacters: [],
+            firstCharacterScoreboard : "",
             submitCharacter: ""
         }
         this.handleInput = this.handleInput.bind(this);
@@ -21,7 +22,6 @@ class Home extends Component {
 
 componentDidMount(){
     const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item=";
-    const apiCharacter = `http://localhost:8011/proxy/profile/profile?user=Gempat&activities=20`;
     const database = "http://localhost/PHP/getData.php#";
       axios.get(`${api}31725`)
         .then(response => { this.setState({ item: response.data.item })})
@@ -33,13 +33,14 @@ componentDidMount(){
         .then(response => { this.setState({ thirdItem: response.data.item })})
         .catch(error => {console.log(error)});
       axios.get(database)
-          .then(response => { this.setState({ databaseCharacters : response.data  })})
+          .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0] })})
           .catch(error => {console.log(error)});
-      axios.get(apiCharacter)
-        .then(response => { this.setState({ characterInfos: response.data })})
-        .catch(error => {console.log(error)});
+          {this.state.firstCharacterScoreboard && 
+          axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.rs_name}&activities=20`)
+            .then(response => { this.setState({ characterInfos: response.data })})
+            .catch(error => {console.log(error)})}
   };
-  
+
 /*Handle the from from the modalSignUp component*/
   handleInput(event){
     this.setState({submitCharacter : event.target.value});
@@ -54,6 +55,7 @@ componentDidMount(){
   };
 
     render() { 
+      console.log(this.state.firstCharacterScoreboard)
         return ( 
             <div>
                 <Title />

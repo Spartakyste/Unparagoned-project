@@ -6,7 +6,7 @@ const Scoreboard = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const database = "http://localhost/PHP/getData.php#";
+        const database = "http://localhost/PHP/getData.php";
         axios.get(database)
             .then(response => { setData(response.data)})
             .catch(error => {console.log(error)});
