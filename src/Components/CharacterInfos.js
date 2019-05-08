@@ -108,9 +108,9 @@ const CharacterInfos = ({currentCharacter}) => {
                 <li>{currentCharacter.activities[2].details}</li>
                 <li>{currentCharacter.activities[3].details}</li>
             </ul>
-            {!showInfos && <a onClick={() => useShowInfos(true)} className="button is-small buttonShow">
+            {!showInfos && <button onClick={() => useShowInfos(true)} className="button is-small buttonShow">
                 <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills 
-                                             of {currentCharacter.name}</span></a>}
+                                             of {currentCharacter.name}</span></button>}
             {showInfos &&
             <div className="">
                 <div className="levelsDisplay levelsDisplayInfos">
@@ -132,8 +132,8 @@ const CharacterInfos = ({currentCharacter}) => {
                     <li>{convertSkill(currentCharacter.skillvalues[4].id)} level : {currentCharacter.skillvalues[4].level},
                      total xp :  {factoringNumbers(currentCharacter.skillvalues[4].xp)}</li>
                 </ul>
-                <a onClick={() => useShowInfos(false)} className="button is-small buttonShow">
-                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of {currentCharacter.name}</span></a>
+                <button onClick={() => useShowInfos(false)} className="button is-small buttonShow">
+                <span className="buttonText">Get {showInfos ? "less" : "more"} informations about the best skills of {currentCharacter.name}</span></button>
             </div>}
         </div>
      );

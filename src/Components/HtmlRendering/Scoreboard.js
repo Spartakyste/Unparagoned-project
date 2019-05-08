@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import CurrentCompetition from './CurrentCompetition';
+import axios from 'axios';
 
 const Scoreboard = () => {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const database = "http://localhost/PHP/getData.php#";
+        axios.get(database)
+            .then(response => { setData(response.data)})
+            .catch(error => {console.log(error)});
+    },[]);
+
     return (
         <article className="level-left">
             <table className="table">
@@ -24,84 +34,16 @@ const Scoreboard = () => {
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr>
-                        <th>1</th>
-                        <td><a href="">Gempat</a>
-                        </td>
-                        <td>38</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>2</th>
-                        <td><a href="">Chronicius</a></td>
-                        <td>32</td>
-                        <td>20</td>
-                        <td>11</td>
-                    </tr>
-                    <tr>
-                        <th>3</th>
-                        <td><a href="">William</a>
-                        </td>
-                        <td>28</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>4</th>
-                        <td><a href="">Josh</a>
-                        </td>
-                        <td>20</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>5</th>
-                        <td><a href="">Spartakyste</a>
-                        </td>
-                        <td>8</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>6</th>
-                        <td><a href="">Leicester City</a>
-                        </td>
-                        <td>38</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>7</th>
-                        <td><a href="">Arsenal</a></td>
-                        <td>38</td>
-                        <td>20</td>
-                        <td>11</td>
-                    </tr>
-                    <tr>
-                        <th>8</th>
-                        <td><a href="">Leicester City</a>
-                        </td>
-                        <td>38</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>9</th>
-                        <td><a href="">Leicester City</a>
-                        </td>
-                        <td>38</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <th>10</th>
-                        <td><a href="">Leicester City</a>
-                        </td>
-                        <td>38</td>
-                        <td>23</td>
-                        <td>12</td>
-                    </tr>
+                    {data.map((character, index) => 
+                        <tr key={index}>
+                            <th>{index + 1}</th>
+                            <td><a href="">{character.rs_name}</a>
+                            </td>
+                            <td>38</td>
+                            <td>23</td>
+                            <td>12</td>
+                        </tr>
+                       )}
                 </tbody>
             </table>
             <aside className="level-right">
