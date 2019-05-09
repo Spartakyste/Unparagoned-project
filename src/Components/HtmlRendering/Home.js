@@ -5,8 +5,8 @@ import Form from '../Form';
 import Tiles from './Tiles';
 
 class Home extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             item: [],
             secondItem: [],
@@ -14,7 +14,8 @@ class Home extends Component {
             characterInfos: [],
             databaseCharacters: [],
             firstCharacterScoreboard : "",
-            submitCharacter: ""
+            submitCharacter: "",
+            isDatabaseLoaded : false
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,14 +34,17 @@ componentDidMount(){
         .then(response => { this.setState({ thirdItem: response.data.item })})
         .catch(error => {console.log(error)});
       axios.get(database)
-          .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0] })})
+          .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0],
+                                              isDatabaseLoaded : true })})
           .catch(error => {console.log(error)});
-          {this.state.firstCharacterScoreboard && 
-          axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.rs_name}&activities=20`)
-            .then(response => { this.setState({ characterInfos: response.data })})
-            .catch(error => {console.log(error)})}
   };
 
+componentDidUpdate(){
+  {this.state.isDatabaseLoaded && 
+    axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.rs_name}&activities=20`)
+      .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
+      .catch(error => {console.log(error)})}
+}
 /*Handle the from from the modalSignUp component*/
   handleInput(event){
     this.setState({submitCharacter : event.target.value});
@@ -55,7 +59,7 @@ componentDidMount(){
   };
 
     render() { 
-      console.log(this.state.firstCharacterScoreboard)
+      console.log(this.state.props)
         return ( 
             <div>
                 <Title />
