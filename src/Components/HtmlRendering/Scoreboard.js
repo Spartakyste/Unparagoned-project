@@ -18,30 +18,26 @@ const Scoreboard = () => {
                 <thead>
                     <tr>
                         <th><abbr title="Position">Pos</abbr></th>
-                        <th>Team</th>
-                        <th><abbr title="Played">Pld</abbr></th>
-                        <th><abbr title="Won">W</abbr></th>
-                        <th><abbr title="Drawn">D</abbr></th>
+                        <th>Player</th>
+                        <th><abbr title="Exp gained">Exp</abbr></th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th><abbr title="Position">Pos</abbr></th>
-                        <th>Team</th>
-                        <th><abbr title="Played">Pld</abbr></th>
-                        <th><abbr title="Won">W</abbr></th>
-                        <th><abbr title="Drawn">D</abbr></th>
+                        <th>Player</th>
+                        <th><abbr title="Exp gained">Exp</abbr></th>
                     </tr>
                 </tfoot>
                 <tbody>
                     {data.map((character, index) => 
                         <tr key={index}>
                             <th>{index + 1}</th>
-                            <td><a href="">{character.rs_name}</a>
+                            <td>
+                                <a href="">{character.rs_name}</a>
                             </td>
+                            {/* Link that from the math done with the exp actual - exp stocked in MySQL */}
                             <td>38</td>
-                            <td>23</td>
-                            <td>12</td>
                         </tr>
                        )}
                 </tbody>

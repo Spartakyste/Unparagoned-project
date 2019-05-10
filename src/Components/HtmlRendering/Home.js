@@ -59,7 +59,6 @@ componentDidUpdate(){
   };
 
     render() { 
-      console.log(this.state.props)
         return ( 
             <div>
                 <Title />

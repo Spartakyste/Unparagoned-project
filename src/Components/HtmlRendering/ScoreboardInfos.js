@@ -6,21 +6,18 @@ const ScoreboardInfos = () => {
             <div className="level-item is-mobile has-text-centered">
                 <div>
                     <p className="heading">Competitions</p>
-                    <p className="title">#17</p>
+                    {/* Bind that to the current competition index from MySQL */}
+                    <p className="title">#1</p>
                 </div>
             </div>
             <div className="level-item is-mobile has-text-centered">
                 <div>
-                    <p className="heading">Following</p>
-                    <p className="title">123</p>
+                    <p className="heading">Current number of players</p>
+                    {/* Link that to the numbers of columns received drom mySQL */}
+                    <p className="title">2</p>
                 </div>
             </div>
-            <div className="level-item is-mobile has-text-centered">
-                <div>
-                    <p className="heading">Followers</p>
-                    <p className="title">456K</p>
-                </div>
-            </div>
+            {/* Debating if keeping it, means implementing a like button somewhere and keep count */}
             <div className="level-item is-mobile has-text-centered">
                 <div>
                     <p className="heading">Likes</p>
