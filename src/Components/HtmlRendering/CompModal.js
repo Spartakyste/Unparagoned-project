@@ -1,10 +1,96 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
-const CompModal = () => {
+const CompModal = ({characters}) => {
 
     const [modal, setModal] = useState(false);
     const [dropdownSkills, setDropdownSkills] = useState(false);
     const [dropdownLength, setDropdownLength] = useState(false);
+    const [skillList, setSkillList] = useState(["Attack", "Strength", "Defence", "Ranged", "Prayer", "Magic", "Runecrafting",
+                                                "Construction", "Dungeonnering", "Hitpoint", "Agility", "Herblore", "Thieving", 
+                                                "Crafting", "Fletching", "Slayer", "Hunter", "Divination", "Fishing", "Cooking", 
+                                                "Firemaking", "Woodcutting", "Farming", "Summoning", "Invention"])
+    const [choosenSkill, setChoosenSkill] = useState(0);
+    const [listOfStartingExp, setListOfStartingExp] = useState([]);
+    const [finalExp, setFinalExp] = useState([])
+
+    function startCompetition(){
+        characters.map((character) => 
+            axios.get(`http://localhost:8011/proxy/profile/profile?user=${character.rs_name}&activities=20`)
+            .then(response => {setListOfStartingExp(response.data.skillvalues)})
+            .catch(error => {console.log(error)})
+        )
+        for(let i = 0; i < listOfStartingExp.length; i++){
+            console.log(listOfStartingExp)
+            if (listOfStartingExp.{i}.id === choosenSkill)
+                setFinalExp([...finalExp, listOfStartingExp.i.xp])
+        }
+    };
+
+
+    const convertSkill = (skillString) => {
+        switch(skillString){
+            case("Invention") : skillString = 26 ;
+            break;
+            case("Magic") : skillString = 6 ;
+            break;
+            case("Constitution") : skillString = 3 ;
+            break;
+            case("Slayer") : skillString = 18
+            break;
+            case("Ranged") : skillString =  4
+            break;
+            case("Attack") : skillString = 0
+            break;
+            case("Mining") : skillString = 14
+            break;
+            case("Dungeonnering") : skillString = 24
+            break;
+            case("Defence") : skillString = 1
+            break;
+            case("Herblore") : skillString = 15
+            break;
+            case("Summoning") : skillString = 23
+            break;
+            case("Fishing") : skillString = 10
+            break;
+            case("Woodcutting") : skillString = 8
+            break;
+            case("Farming") : skillString = 19
+            break;
+            case("Cooking") : skillString = 7
+            break;
+            case("Firemaking") : skillString = 11
+            break;
+            case("Thieving") : skillString = 17
+            break;
+            case("Strength") : skillString = 2
+            break;
+            case("Crafting") : skillString = 12
+            break;
+            case("Fletching") : skillString = 9
+            break;
+            case("Construction") : skillString = 22
+            break;
+            case("Hunter") : skillString =  21
+            break;
+            case("Smithing") : skillString = 13
+            break;
+            case("Prayer") : skillString = 5
+            break;
+            case("Agility") : skillString = 16
+            break;
+            case("Divination") : skillString = 25
+            break;
+            case("Runecrafting") : skillString = 20
+            break;
+            default:
+        }
+        return skillString;
+        
+    };
+
+    
 
     return ( 
         <article>
@@ -36,9 +122,10 @@ const CompModal = () => {
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
                                 {/* Find a way to display all the skills there */}
-                                    <a href="#" className="dropdown-item">
-                                        Dropdown item
-                                     </a>
+                                {skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill(convertSkill(skill))} 
+                                    className="dropdown-item">
+                                        {skill}
+                                    </a>)}
                                 </div>
                             </div>
                         </div>
@@ -61,16 +148,17 @@ const CompModal = () => {
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
                                 {/* Find a way to display all the skills there */}
-                                    <a href="#" className="dropdown-item">
-                                        Dropdown item
-                                     </a>
+                                    {skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill(skill)} 
+                                    className="dropdown-item">
+                                        {skill}
+                                    </a>)}
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <footer className="modal-card-foot">
-                        <button className="button is-success">Create the competition !</button>
+                        <button onClick={startCompetition} className="button is-success">Create the competition !</button>
                         <button onClick={() => setModal(false)} className="button">Cancel</button>
                     </footer>
                 </div>
