@@ -20,11 +20,6 @@ const CompModal = ({characters}) => {
             .then(response => {setListOfStartingExp(response.data.skillvalues)})
             .catch(error => {console.log(error)})
         )
-        for(let i = 0; i < listOfStartingExp.length; i++){
-            console.log(listOfStartingExp)
-            if (listOfStartingExp.{i}.id === choosenSkill)
-                setFinalExp([...finalExp, listOfStartingExp.i.xp])
-        }
     };
 
 

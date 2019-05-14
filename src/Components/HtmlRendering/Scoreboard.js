@@ -25,7 +25,7 @@ const Scoreboard = ({characters}) => {
                         <tr key={index}>
                             <th>{index + 1}</th>
                             <td>
-                                <a href="">{character.rs_name}</a>
+                                <a href="">{character}</a>
                             </td>
                             {/* Link that from the math done with the exp actual - exp stocked in MySQL */}
                             <td>38</td>

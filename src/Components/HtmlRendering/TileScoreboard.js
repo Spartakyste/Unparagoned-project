@@ -4,6 +4,8 @@ import axios from 'axios';
 const TileScoreboard = () => {
     
     const [data, setData] = useState([]);
+/*    tempScoreboard will be replaced by the data from a database with the code above
+*/    const [tempScoreboard, setTempScoreboard] = useState(["Gempat", "Spartakyste"]);
 
     useEffect(() => {
         const database = "http://localhost/PHP/getData.php";
@@ -26,10 +28,10 @@ const TileScoreboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {data.map((character, index) => 
+                    {tempScoreboard.map((character, index) => 
                         <tr key={index}>
                             <th>{index + 1}</th>
-                            <td><a href="">{character.rs_name}</a>
+                            <td><a href="">{character}</a>
                             </td>
                             <td>38</td>
                             <td>23</td>

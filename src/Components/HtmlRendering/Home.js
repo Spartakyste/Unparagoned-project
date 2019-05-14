@@ -14,8 +14,7 @@ class Home extends Component {
             characterInfos: [],
             databaseCharacters: [],
             firstCharacterScoreboard : "",
-            submitCharacter: "",
-            isDatabaseLoaded : false
+            submitCharacter: ""
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -37,13 +36,12 @@ componentDidMount(){
           .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0],
                                               isDatabaseLoaded : true })})
           .catch(error => {console.log(error)});
+      axios.get(`http://localhost:8011/proxy/profile/profile?user=Gempat&activities=20`)
+        .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
+        .catch(error => {console.log(error)})
   };
 
 componentDidUpdate(){
-  {this.state.isDatabaseLoaded && 
-    axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.rs_name}&activities=20`)
-      .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
-      .catch(error => {console.log(error)})}
 }
 /*Handle the from from the modalSignUp component*/
   handleInput(event){
