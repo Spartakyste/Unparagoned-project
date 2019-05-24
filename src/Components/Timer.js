@@ -4,12 +4,13 @@ import '../App.css'
 const Timer = () => {
     const [time, setTime] = useState(new Date().toDateString());
 
-     useEffect(() => {
+    useEffect(() => {
         const updateTime = () => {
             setTime(new Date().toLocaleTimeString());
         }
-        setInterval(updateTime, 1000);
-    }, []);
+        const interval = setInterval(updateTime, 1000);
+        return () => clearInterval(interval);
+    }, [time]);
 
     return ( 
         <div>

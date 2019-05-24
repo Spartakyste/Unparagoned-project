@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Route, NavLink, Switch } from "react-router-dom";
 import Home from './Home';

@@ -21,16 +21,17 @@ const Scoreboard = ({characters}) => {
                     </tr>
                 </tfoot>
                 <tbody>
-                    {characters.map((character, index) => 
+                    {characters.length !== 0 ? characters.map((character, index) => 
                         <tr key={index}>
                             <th>{index + 1}</th>
                             <td>
-                                <a href="">{character}</a>
+                                <a href="">{character.region}</a>
                             </td>
                             {/* Link that from the math done with the exp actual - exp stocked in MySQL */}
-                            <td>38</td>
+                            <td>{character.job}</td>
                         </tr>
-                       )}
+                       )
+                    : <p>Wait</p>}
                 </tbody>
             </table>
             <aside className="level-right">

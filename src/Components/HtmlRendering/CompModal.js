@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const CompModal = ({characters}) => {
@@ -10,19 +11,43 @@ const CompModal = ({characters}) => {
                                                 "Construction", "Dungeonnering", "Hitpoint", "Agility", "Herblore", "Thieving", 
                                                 "Crafting", "Fletching", "Slayer", "Hunter", "Divination", "Fishing", "Cooking", 
                                                 "Firemaking", "Woodcutting", "Farming", "Summoning", "Invention"])
-    const [choosenSkill, setChoosenSkill] = useState(0);
+    const [choosenSkill, setChoosenSkill] = useState({skill : "", skillId : 0});
     const [listOfStartingExp, setListOfStartingExp] = useState([]);
     const [finalExp, setFinalExp] = useState([])
 
-    function startCompetition(){
-        characters.map((character) => 
-            axios.get(`http://localhost:8011/proxy/profile/profile?user=${character.rs_name}&activities=20`)
-            .then(response => {setListOfStartingExp(response.data.skillvalues)})
-            .catch(error => {console.log(error)})
-        )
+    // Start when the user click on the Start competition button
+    function startCompetition(count) {
+        //Get an api call for every player registered,
+       axios.get(`http://localhost:8011/proxy/profile/profile?user=${characters[count].name}`)
+            .then(response => {
+                count++
+                //Navigate through the response to pick up the xp value of the skill choosen,
+                for ( let i = 0; i < response.data.skillvalues.length; i++){
+                    if(response.data.skillvalues[i].id === choosenSkill){
+                //And put it inside an array with the player name.
+                        setListOfStartingExp(listOfStartingExp => 
+                            [...listOfStartingExp, [response.data.name, response.data.skillvalues[i].xp]])
+                    } 
+                }
+                //Recursive call to make it happen for all players in one click.
+                if (count < characters.length) {
+                    startCompetition(count)
+                } 
+            })
+            .catch(error => { console.log(error) });
     };
 
 
+    useEffect(()=> {
+        if (listOfStartingExp.length) {
+            axios.post('http://localhost/competition.php', {exp : listOfStartingExp})
+                .then (res => {console.log(res.config.data)})
+                .catch(error => {console.log(error)})}
+    },[listOfStartingExp.length === characters.length])
+            
+            
+
+    //Switch to convert into number because skill are identified as 'id' in the api response.
     const convertSkill = (skillString) => {
         switch(skillString){
             case("Invention") : skillString = 26 ;
@@ -85,30 +110,35 @@ const CompModal = ({characters}) => {
         
     };
 
-    
 
     return ( 
         <article>
-            <a onClick={() => setModal(!modal)} className="button is-dark">Start a new Competition !</a>
-            <div className="modal" style={{ display: modal ? "block" : "none" }}>
+            <a onClick={() => setModal(!modal)} className="button is-white is-outlined has-text-black" style={{marginTop : "1rem"}}>
+            Start a new Competition !</a>
+
+            <div className="modal" style={{ display: modal ? "block" : "none", padding:"2rem" }}>
                 <div className="modal-background"></div>
                 <div className="modal-card">
                     <header className="modal-card-head">
-                        <p className="modal-card-title">Modal title</p>
+                        <p className="modal-card-title">Competition settings</p>
                         <button onClick={() => setModal(false)} className="delete" aria-label="close"></button>
                     </header>
 
                     <section className="modal-card-body has-text-left">
                     <p className="title is-2">Here you can start a new competition</p>
-                        {/* Replace incoming Lorem with a description of what to do for user experience */}
-                        <p>Nisi ut officia eiusmod excepteur eu laboris aliquip. Nulla id sit sint incididunt in. Enim sit amet laborum ullamco.
-                        Tempor anim quis voluptate laborum nostrud nisi. Elit voluptate occaecat id mollit et Lorem dolore laborum sunt incididunt in ullamco.
-                         Ipsum ullamco eiusmod ea enim anim esse. Ut ad in qui in tempor officia veniam qui ex dolore sit.</p>
+                        <p className="title is-5">
+                            The competition system will pick up every player registered in the database, then register the current amount of experience
+                             obtained in the skill that will be choose after. The system will calculate the amount of experience gained by substracting
+                             the current amount of experience by the amount saved at the creation of the competition.
+                        </p>
+                        <p>Click on the button below to display all the Runescape skills, then pick one to select in wich skill
+                            you want to start the competition in.
+                        </p>
 
-                        <div className={dropdownSkills ? "dropdown is-active" : "dropdown"}>
+                        <div className={dropdownSkills ? "dropdown is-active" : "dropdown"} style={{margin:"1rem"}}>
                             <div className="dropdown-trigger">
                                 <button onClick={() => setDropdownSkills(!dropdownSkills)} className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                    <span>Dropdown button</span>
+                                    <span>Choose one</span>
                                     <span className="icon is-small">
                                         <i className="fas fa-angle-down" aria-hidden="true"></i>
                                     </span>
@@ -116,7 +146,6 @@ const CompModal = ({characters}) => {
                             </div>
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
-                                {/* Find a way to display all the skills there */}
                                 {skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill(convertSkill(skill))} 
                                     className="dropdown-item">
                                         {skill}
@@ -126,15 +155,14 @@ const CompModal = ({characters}) => {
                         </div>
 
                         <p className="title is-3">Now pick up the length of the competition</p>
-                        {/* Replace incoming Lorem with a description of what to do for user experience */}
-                        <p>Nisi ut officia eiusmod excepteur eu laboris aliquip. Nulla id sit sint incididunt in. Enim sit amet laborum ullamco.
-                        Tempor anim quis voluptate laborum nostrud nisi. Elit voluptate occaecat id mollit et Lorem dolore laborum sunt incididunt in ullamco.
-                         Ipsum ullamco eiusmod ea enim anim esse. Ut ad in qui in tempor officia veniam qui ex dolore sit.</p>
+                        <p>There you'll have to pick up a length for the competition, there will be x choices.
+                            The result will be published after the competition is done.
+                        </p>
                          {/* We'll display some pre-writen times there once we'll have found a way to apply a timer to the competition */}
-                         <div className={dropdownLength ? "dropdown is-active" : "dropdown"}>
+                         <div className={dropdownLength ? "dropdown is-active" : "dropdown"} style={{marginTop:"1rem", marginLeft:"1rem", marginRight:"1rem"}}>
                             <div className="dropdown-trigger">
                                 <button onClick={() => setDropdownLength(!dropdownLength)} className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                    <span>Dropdown button</span>
+                                    <span>Pick the length</span>
                                     <span className="icon is-small">
                                         <i className="fas fa-angle-down" aria-hidden="true"></i>
                                     </span>
@@ -142,18 +170,14 @@ const CompModal = ({characters}) => {
                             </div>
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
-                                {/* Find a way to display all the skills there */}
-                                    {skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill(skill)} 
-                                    className="dropdown-item">
-                                        {skill}
-                                    </a>)}
+                                     <a href="#" className="dropdown-item"> 1 day </a>
                                 </div>
                             </div>
                         </div>
                     </section>
 
                     <footer className="modal-card-foot">
-                        <button onClick={startCompetition} className="button is-success">Create the competition !</button>
+                        <button onClick={() => startCompetition(0)} className="button is-success">Create the competition !</button>
                         <button onClick={() => setModal(false)} className="button">Cancel</button>
                     </footer>
                 </div>

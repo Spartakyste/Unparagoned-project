@@ -4,15 +4,14 @@ import axios from 'axios';
 const TileScoreboard = () => {
     
     const [data, setData] = useState([]);
-/*    tempScoreboard will be replaced by the data from a database with the code above
-*/    const [tempScoreboard, setTempScoreboard] = useState(["Gempat", "Spartakyste"]);
 
-    useEffect(() => {
-        const database = "http://localhost/PHP/getData.php";
+   useEffect(() => {
+        const database = "http://localhost/getData.php";
         axios.get(database)
             .then(response => { setData(response.data)})
             .catch(error => {console.log(error)});
     },[]);
+    
     return ( 
         <article className="tile is-child notification is-primary">
             <aside className="table-container" style={{margin:0.5}}>
@@ -22,20 +21,16 @@ const TileScoreboard = () => {
                         <tr>
                             <th><abbr title="Position">Pos</abbr></th>
                             <th>Player</th>
-                            <th><abbr title="Points">Points</abbr></th>
-                            <th><abbr title="Won">W</abbr></th>
-                            <th><abbr title="Drawn">D</abbr></th>
+                            <th><abbr title="Exp gained">Exp</abbr></th>
                         </tr>
                     </thead>
                     <tbody>
-                    {tempScoreboard.map((character, index) => 
+                    {data.map((character, index) => 
                         <tr key={index}>
                             <th>{index + 1}</th>
-                            <td><a href="">{character}</a>
+                            <td><a href="">{character.name}</a>
                             </td>
                             <td>38</td>
-                            <td>23</td>
-                            <td>12</td>
                         </tr>
                        )}
                 </tbody>

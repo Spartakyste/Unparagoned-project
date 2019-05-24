@@ -5,7 +5,7 @@ import TileScoreboard from './TileScoreboard';
 import TilePictures from './TilePictures';
 import CharacterInfos from '../CharacterInfos';
 
-const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter, databaseCharacters}) => {
+const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter}) => {
 
     return ( 
         <section className="columns" style={{margin: "1rem"}}>
@@ -13,7 +13,7 @@ const Tiles = ({currentItem, secondItem, thirdItem, currentCharacter, databaseCh
                 <div className="tile is-vertical is-8">
                     <div className="tile">
                         <div className="tile is-parent is-vertical">
-                            <TileScoreboard characterFromDatabase={databaseCharacters}/>
+                            <TileScoreboard/>
                             {currentCharacter.length === 0 ? <div className="loader"></div> 
                             : <CharacterInfos className="is-5" currentCharacter={currentCharacter} />}
                         </div>

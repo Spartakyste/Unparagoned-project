@@ -22,7 +22,7 @@ class Home extends Component {
 
 componentDidMount(){
     const api = "http://localhost:8010/proxy/m=itemdb_rs/api/catalogue/detail.json?item=";
-    const database = "http://localhost/PHP/getData.php#";
+    const database = "http://localhost/getData.php";
       axios.get(`${api}31725`)
         .then(response => { this.setState({ item: response.data.item })})
         .catch(error => {console.log(error)});
@@ -32,20 +32,25 @@ componentDidMount(){
       axios.get(`${api}31733`)
         .then(response => { this.setState({ thirdItem: response.data.item })})
         .catch(error => {console.log(error)});
-      axios.get(database)
+     axios.get(database)
           .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0],
                                               isDatabaseLoaded : true })})
           .catch(error => {console.log(error)});
-      axios.get(`http://localhost:8011/proxy/profile/profile?user=Gempat&activities=20`)
-        .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
-        .catch(error => {console.log(error)})
   };
 
-componentDidUpdate(){
-}
-/*Handle the from from the modalSignUp component*/
+  componentDidUpdate(){
+    this.state.isDatabaseLoaded && 
+      axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.name}&activities=20`)
+      .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
+      .catch(error => {console.log(error)})
+  };
+
+  upperCase = (string) => {
+    return string.substr(0,1).toUpperCase() + string.slice(1)
+  };
+
   handleInput(event){
-    this.setState({submitCharacter : event.target.value});
+    this.setState({ submitCharacter : this.upperCase(event.target.value)});
   };
 
   handleSubmit(event){
@@ -57,13 +62,13 @@ componentDidUpdate(){
   };
 
     render() { 
+      console.log(this.state.firstCharacterScoreboard.name)
         return ( 
             <div>
                 <Title />
                 <Form handleInput={this.handleInput} handleSubmit={this.handleSubmit} />
                 <Tiles currentCharacter={this.state.characterInfos} currentItem={this.state.item}
-                    secondItem={this.state.secondItem} thirdItem={this.state.thirdItem}
-                    databaseCharacters={this.state.databaseCharacters} />
+                    secondItem={this.state.secondItem} thirdItem={this.state.thirdItem}/>
             </div>
          );
     }

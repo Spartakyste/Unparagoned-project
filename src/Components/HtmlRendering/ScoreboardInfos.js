@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ScoreboardInfos = () => {
+const ScoreboardInfos = ({characters}) => {
     return ( 
         <nav className="level is-mobile" style={{marginTop : "1rem"}}>
             <div className="level-item is-mobile has-text-centered">
@@ -12,16 +12,16 @@ const ScoreboardInfos = () => {
             </div>
             <div className="level-item is-mobile has-text-centered">
                 <div>
-                    <p className="heading">Current number of players</p>
-                    {/* Link that to the numbers of columns received drom mySQL */}
-                    <p className="title">2</p>
+                    <p className="heading">Running time</p>
+                    {/* Add a <p> and display a counter who start when we create a competition */}
+                    <p className="title">~</p>
                 </div>
             </div>
-            {/* Debating if keeping it, means implementing a like button somewhere and keep count */}
+            {/* Link that to the numbers of columns received drom mySQL */}
             <div className="level-item is-mobile has-text-centered">
                 <div>
-                    <p className="heading">Likes</p>
-                    <p className="title">789</p>
+                    <p className="heading">Number of players</p>
+                    <p className="title">{characters.length}</p>
                 </div>
             </div>
         </nav>
