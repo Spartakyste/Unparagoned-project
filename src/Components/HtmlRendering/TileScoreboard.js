@@ -28,7 +28,7 @@ const TileScoreboard = () => {
                     {data.map((character, index) => 
                         <tr key={index}>
                             <th>{index + 1}</th>
-                            <td><a href="">{character.name}</a>
+                            <td><a href="">{character.Name}</a>
                             </td>
                             <td>38</td>
                         </tr>

@@ -33,14 +33,14 @@ componentDidMount(){
         .then(response => { this.setState({ thirdItem: response.data.item })})
         .catch(error => {console.log(error)});
      axios.get(database)
-          .then(response => { this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0],
+          .then(response => {this.setState({ databaseCharacters : response.data, firstCharacterScoreboard : response.data[0],
                                               isDatabaseLoaded : true })})
           .catch(error => {console.log(error)});
   };
 
   componentDidUpdate(){
     this.state.isDatabaseLoaded && 
-      axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.name}&activities=20`)
+      axios.get(`http://localhost:8011/proxy/profile/profile?user=${this.state.firstCharacterScoreboard.Name}&activities=20`)
       .then(response => { this.setState({ characterInfos: response.data, isDatabaseLoaded : false })})
       .catch(error => {console.log(error)})
   };
@@ -61,8 +61,7 @@ componentDidMount(){
       .catch(error => {console.log(error)});
   };
 
-    render() { 
-      console.log(this.state.firstCharacterScoreboard.name)
+    render() {
         return ( 
             <div>
                 <Title />

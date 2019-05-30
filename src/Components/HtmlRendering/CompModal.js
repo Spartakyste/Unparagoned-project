@@ -7,26 +7,27 @@ const CompModal = ({characters}) => {
     const [modal, setModal] = useState(false);
     const [dropdownSkills, setDropdownSkills] = useState(false);
     const [dropdownLength, setDropdownLength] = useState(false);
-    const [skillList, setSkillList] = useState(["Attack", "Strength", "Defence", "Ranged", "Prayer", "Magic", "Runecrafting",
-                                                "Construction", "Dungeonnering", "Hitpoint", "Agility", "Herblore", "Thieving", 
-                                                "Crafting", "Fletching", "Slayer", "Hunter", "Divination", "Fishing", "Cooking", 
-                                                "Firemaking", "Woodcutting", "Farming", "Summoning", "Invention"])
+
+    const [skillList, setSkillList] = useState([]);
     const [choosenSkill, setChoosenSkill] = useState({skill : "", skillId : 0});
+    const [competitionLength, setCompetitionLength] = useState([1, 3, 7]);
+    const [choosenLength, setChoosenLength] = useState(0);
+
     const [listOfStartingExp, setListOfStartingExp] = useState([]);
-    const [finalExp, setFinalExp] = useState([])
 
     // Start when the user click on the Start competition button
     function startCompetition(count) {
         //Get an api call for every player registered,
-       axios.get(`http://localhost:8011/proxy/profile/profile?user=${characters[count].name}`)
+       axios.get(`http://localhost:8011/proxy/profile/profile?user=${characters[count].Name}`)
             .then(response => {
                 count++
                 //Navigate through the response to pick up the xp value of the skill choosen,
                 for ( let i = 0; i < response.data.skillvalues.length; i++){
-                    if(response.data.skillvalues[i].id === choosenSkill){
+                    if(response.data.skillvalues[i].id === choosenSkill.skillId){
+                        const number = response.data.skillvalues[i].xp
                 //And put it inside an array with the player name.
                         setListOfStartingExp(listOfStartingExp => 
-                            [...listOfStartingExp, [response.data.name, response.data.skillvalues[i].xp]])
+                            [...listOfStartingExp, [response.data.name, number.toFixed(number.length).slice(0, -1)]])
                     } 
                 }
                 //Recursive call to make it happen for all players in one click.
@@ -39,76 +40,14 @@ const CompModal = ({characters}) => {
 
 
     useEffect(()=> {
+        axios.get('http://localhost/getSkill.php')
+             .then(res => {setSkillList(res.data)})
+             .catch(error => {console.log(error)} )
         if (listOfStartingExp.length) {
-            axios.post('http://localhost/competition.php', {exp : listOfStartingExp})
+            axios.post('http://localhost/competition.php', {exp : listOfStartingExp, skill : choosenSkill.skill, choosenLength})
                 .then (res => {console.log(res.config.data)})
                 .catch(error => {console.log(error)})}
     },[listOfStartingExp.length === characters.length])
-            
-            
-
-    //Switch to convert into number because skill are identified as 'id' in the api response.
-    const convertSkill = (skillString) => {
-        switch(skillString){
-            case("Invention") : skillString = 26 ;
-            break;
-            case("Magic") : skillString = 6 ;
-            break;
-            case("Constitution") : skillString = 3 ;
-            break;
-            case("Slayer") : skillString = 18
-            break;
-            case("Ranged") : skillString =  4
-            break;
-            case("Attack") : skillString = 0
-            break;
-            case("Mining") : skillString = 14
-            break;
-            case("Dungeonnering") : skillString = 24
-            break;
-            case("Defence") : skillString = 1
-            break;
-            case("Herblore") : skillString = 15
-            break;
-            case("Summoning") : skillString = 23
-            break;
-            case("Fishing") : skillString = 10
-            break;
-            case("Woodcutting") : skillString = 8
-            break;
-            case("Farming") : skillString = 19
-            break;
-            case("Cooking") : skillString = 7
-            break;
-            case("Firemaking") : skillString = 11
-            break;
-            case("Thieving") : skillString = 17
-            break;
-            case("Strength") : skillString = 2
-            break;
-            case("Crafting") : skillString = 12
-            break;
-            case("Fletching") : skillString = 9
-            break;
-            case("Construction") : skillString = 22
-            break;
-            case("Hunter") : skillString =  21
-            break;
-            case("Smithing") : skillString = 13
-            break;
-            case("Prayer") : skillString = 5
-            break;
-            case("Agility") : skillString = 16
-            break;
-            case("Divination") : skillString = 25
-            break;
-            case("Runecrafting") : skillString = 20
-            break;
-            default:
-        }
-        return skillString;
-        
-    };
 
 
     return ( 
@@ -146,10 +85,12 @@ const CompModal = ({characters}) => {
                             </div>
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
-                                {skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill(convertSkill(skill))} 
+                                {skillList.length !== 0 ?
+                                 skillList.map((skill, index) => <a key={index} href="#" onClick={() => setChoosenSkill({skill : skill.NAME, skillId : skill.ID - 1})} 
                                     className="dropdown-item">
-                                        {skill}
-                                    </a>)}
+                                        {skill.NAME}
+                                    </a>)
+                                    : <p>Wait</p>}
                                 </div>
                             </div>
                         </div>
@@ -170,7 +111,12 @@ const CompModal = ({characters}) => {
                             </div>
                             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                                 <div className="dropdown-content">
-                                     <a href="#" className="dropdown-item"> 1 day </a>
+                                {competitionLength.length !== 0 ?
+                                 competitionLength.map((length, index) => <a key={index} href="#" onClick={() => setChoosenLength(length)} 
+                                    className="dropdown-item">
+                                        {length}
+                                    </a>)
+                                    : <p>Wait</p>}
                                 </div>
                             </div>
                         </div>
